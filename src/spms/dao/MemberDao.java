@@ -13,16 +13,6 @@ import spms.vo.Member;
 
 public class MemberDao {
 	Connection connection;
-//	
-//	public void setConnection(Connection connection){
-//		this.connection = connection;
-//	}
-//	
-//	DBConnectionPool connPool;
-//	public void setConnectionPool(DBConnectionPool connPool){
-//		this.connPool = connPool;
-//	}
-//	
 	DataSource ds;
 	public void setDataSource(DataSource ds){
 		this.ds = ds;
@@ -32,7 +22,6 @@ public class MemberDao {
 		ResultSet rs = null;
 		
 		try{
-//			stmt = connPool.getConnection().createStatement();
 			connection = ds.getConnection();
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery("SELECT MNO, MNAME, EMAIL, CRE_DATE"

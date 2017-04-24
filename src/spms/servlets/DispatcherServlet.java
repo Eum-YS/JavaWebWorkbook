@@ -41,9 +41,9 @@ public class DispatcherServlet extends HttpServlet {
 				}
 			} else if("/member/delete.do".equals(servletPath)){
 				pageControllerPath = "/member/delete";
-			} else if("/member/login.do".equals(servletPath)){
+			} else if("/auth/login.do".equals(servletPath)){
 				pageControllerPath = "/auth/login";
-			} else if("/member/logout.do".equals(servletPath)){
+			} else if("/auth/logout.do".equals(servletPath)){
 				pageControllerPath = "/auth/logout";
 			}
 			

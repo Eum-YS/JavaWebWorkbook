@@ -20,37 +20,15 @@ public class MemberDeleteServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		Connection conn = null;
-//		PreparedStatement stmt = null;
-		
 		try{
 			ServletContext sc = this.getServletContext();
-//			Class.forName(sc.getInitParameter("driver"));
-//			conn = DriverManager.getConnection( sc.getInitParameter("url"),
-//					sc.getInitParameter("username"),
-//					sc.getInitParameter("password"));
-
-//			conn = (Connection)sc.getAttribute("conn");
-//			
-//			MemberDao memberDao = new MemberDao();
-//			memberDao.setConnection(conn);
 			MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
 			memberDao.delete(Integer.parseInt(req.getParameter("no")));
-			
-//			stmt = conn.prepareStatement("DELETE FROM MEMBERS"
-//					+ " WHERE MNO=?");
-//			stmt.setInt(1, Integer.parseInt(req.getParameter("no")));
-//			
-//			stmt.executeUpdate();
-			resp.sendRedirect("list");
+
+			req.setAttribute("viewUrl", "redirect:list.do");
 		} catch (Exception e) {
-//			throw new ServletException(e);
-			req.setAttribute("error", e);
-			RequestDispatcher rd = req.getRequestDispatcher("/Error.jsp");
-			rd.forward(req, resp);
+			throw new ServletException(e);
 		} finally{
-//			try { if(stmt!=null) stmt.close(); } catch(Exception e){};
-//			try { if(conn!=null) conn.close(); } catch(Exception e){};
 		}
 	}
 }
