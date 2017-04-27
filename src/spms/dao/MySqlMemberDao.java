@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import spms.annotation.Component;
 import spms.vo.Member;
 
-public class MemberDao {
+@Component("memberDao")
+public class MySqlMemberDao implements MemberDao{
 	Connection connection;
 	DataSource ds;
 	public void setDataSource(DataSource ds){
