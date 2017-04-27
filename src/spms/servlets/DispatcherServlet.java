@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import spms.bind.DataBinding;
+import spms.bind.ServletRequestDataBinder;
 import spms.context.ApplicationContext;
 import spms.controls.Controller;
 import spms.listeners.ContextLoaderListener;
@@ -30,7 +32,9 @@ public class DispatcherServlet extends HttpServlet {
 			model.put("session", req.getSession());
 
 			Controller pageController = (Controller)ctx.getBeans(servletPath);
-
+			if(pageController instanceof DataBinding){
+				prepareRequestData(req, model, (DataBinding)pageController);
+			}
 			String viewUrl = pageController.execute(model);
 			for(String key : model.keySet()){
 				req.setAttribute(key, model.get(key));
@@ -52,4 +56,16 @@ public class DispatcherServlet extends HttpServlet {
 		}
 	}
 	
+	private void prepareRequestData(HttpServletRequest req, HashMap<String, Object> model, DataBinding dataBinding) throws Exception{
+		Object[] dataBinders = dataBinding.getDataBinders();
+		String dataName = null;
+		Class<?> dataType = null;
+		Object dataObj = null;
+		for (int i = 0; i < dataBinders.length; i+=2){
+			dataName = (String)dataBinders[i];
+			dataType = (Class<?>)dataBinders[i+1];
+			dataObj = ServletRequestDataBinder.binder(req, dataType, dataName);
+			model.put(dataName, dataObj);
+		}
+	}
 }

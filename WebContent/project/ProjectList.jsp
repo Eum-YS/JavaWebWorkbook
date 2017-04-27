@@ -24,11 +24,11 @@
 <c:forEach var='project' items="${projects }">
 	<tr>
 		<td>${project.no }</td>
-		<td><a href='update.do=${project.no }'>${project.title }</a></td>
+		<td><a href='update.do?no=${project.no }'>${project.title }</a></td>
 		<td>${project.startDate }</td>
 		<td>${project.endDate }</td>
 		<td>${project.state }</td>
-		<td><a href='delete.do=${project.no }'>[삭제]</a></td>
+		<td><a href='delete.do?no=${project.no }'>[삭제]</a></td>
 	</tr>
 </c:forEach>
 </table>
