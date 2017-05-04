@@ -9,7 +9,7 @@ public class Project {
 	protected Date startDate;
 	protected Date endDate;
 	protected int state;
-	protected Date createDate;
+	protected Date createdDate;
 	protected String tags;
 	
 	public int getNo() {
@@ -54,11 +54,11 @@ public class Project {
 		this.state = state;
 		return this;
 	}
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
-	public Project setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public Project setCreatedDate(Date createDate) {
+		this.createdDate = createDate;
 		return this;
 	}
 	public String getTags() {
